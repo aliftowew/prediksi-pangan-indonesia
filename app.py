@@ -201,24 +201,33 @@ st.title("📈 Dasbor Cerdas Prediksi Harga Pangan")
 st.markdown("Integrasi Live API: Saham Global & Satelit Cuaca Open-Meteo dengan Predictive AI")
 st.divider()
 
-# Membagi layar: Sidebar untuk input, area utama untuk output
-with st.sidebar:
-    st.header("⚙️ Pengaturan Prediksi")
+# --- PENGATURAN DI LAYAR UTAMA ---
+st.header("⚙️ Pengaturan Prediksi")
+
+# Membagi area pengaturan menjadi 3 kolom agar sejajar menyamping
+col_atur1, col_atur2, col_atur3 = st.columns([2, 2, 1])
+
+with col_atur1:
     pilihan_komoditas = st.selectbox("1. Pilih Komoditas", daftar_komoditas, index=daftar_komoditas.index('Cabai Rawit Merah'))
+with col_atur2:
     jumlah_hari = st.slider("2. Prediksi Berapa Hari ke Depan?", min_value=7, max_value=180, value=60, step=1)
+with col_atur3:
+    st.markdown("<br>", unsafe_allow_html=True) # Trik spasi agar tombol sejajar ke bawah dengan kotak input
     tombol_jalankan = st.button("Mulai Prediksi 🚀", use_container_width=True, type="primary")
 
-# Jika tombol ditekan
+st.divider() # Garis pembatas sebelum hasil muncul
+
+# --- AREA HASIL PREDIKSI ---
 if tombol_jalankan:
     with st.spinner(f"🤖 AI sedang menganalisis data {pilihan_komoditas}..."):
         # Panggil fungsi AI
         g_zoom, teks_desc, df_tabel, g_full, g_komponen = prediksi_harga(pilihan_komoditas, jumlah_hari)
         
         # Tampilkan hasil di layar utama
-        col1, col2 = st.columns([2, 1])
-        with col1:
+        col_hasil1, col_hasil2 = st.columns([2, 1])
+        with col_hasil1:
             st.pyplot(g_zoom)
-        with col2:
+        with col_hasil2:
             st.markdown(teks_desc)
             
         st.divider()
