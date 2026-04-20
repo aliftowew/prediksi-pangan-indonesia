@@ -342,6 +342,6 @@ with tab_data:
 
 st.divider()
 st.caption(
-    "Dibuat dengan ❤️ oleh Alif Towew • #SemuaBisaDihitung • "
+    "Dibuat oleh Alif Towew • #SemuaBisaDihitung • "
     "Data: Bapanas/Pangan Nasional"
 )
